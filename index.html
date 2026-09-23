@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Escalas Central Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F7FF; --card:#FFFFFF; --ink:#16213A; --muted:#5B6782;
+  --line:#D6E0F2; --blue:#1E4FA3; --green:#1F9D55; --red:#D7263D;
+  --soft:#E6EEFD; --field:#FFFFFF;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1628; --card:#18223A; --ink:#E8EEFB; --muted:#9AA8C7;
+    --line:#2C3A5C; --blue:#7FA8F0; --green:#4CC98A; --red:#FF6B7D;
+    --soft:#22304F; --field:#111A2E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1628; --card:#18223A; --ink:#E8EEFB; --muted:#9AA8C7;
+  --line:#2C3A5C; --blue:#7FA8F0; --green:#4CC98A; --red:#FF6B7D;
+  --soft:#22304F; --field:#111A2E;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.45}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+header.top{display:flex;align-items:center;gap:12px;margin:8px 0 16px}
+header.top h1{font-size:1.6rem;font-weight:900;margin:0;color:var(--blue);letter-spacing:-.01em}
+header.top p{margin:0;color:var(--muted);font-size:.95rem}
+.logo{width:44px;height:44px;border-radius:14px;background:var(--blue);display:grid;place-items:center;font-size:24px;flex:none}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tab{flex:1;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:800;padding:10px;border-radius:14px;cursor:pointer}
+.tab[aria-selected="true"]{border-color:var(--blue);background:var(--blue);color:#fff}
+section.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
+section.box h2{font-size:1.1rem;margin:0 0 12px;font-weight:900}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.85rem;font-weight:700;color:var(--muted)}
+input,select{font:inherit;color:var(--ink);background:var(--field);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;min-width:0}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--green);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--soft);border-radius:999px;padding:5px 6px 5px 12px;font-weight:800;color:var(--blue)}
+.chip button{border:0;background:transparent;color:var(--muted);font-size:1.1rem;cursor:pointer;line-height:1;padding:2px 6px;border-radius:999px}
+.btn{font:inherit;font-weight:800;border:0;border-radius:12px;padding:9px 14px;cursor:pointer;background:var(--soft);color:var(--blue)}
+.btn.primary{background:var(--green);color:#fff}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.ghost{background:transparent;border:1.5px dashed var(--line);color:var(--muted)}
+.btn.small{padding:5px 10px;font-size:.85rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.turma{border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.turma-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.turma-head input.nome{flex:1 1 160px;font-weight:800;color:var(--blue)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.ed{border-collapse:separate;border-spacing:6px 4px;min-width:100%}
+table.ed th{font-size:.8rem;color:var(--muted);font-weight:800;text-align:left;white-space:nowrap;padding:0 2px}
+table.ed td input{width:130px}
+table.ed td input.vazio{border-color:var(--red);background:color-mix(in srgb,var(--red) 7%,var(--field))}
+.fill{white-space:nowrap}
+.icon{border:0;background:var(--soft);color:var(--blue);border-radius:10px;width:34px;height:34px;cursor:pointer;font-size:1rem;font-weight:900}
+.icon.del{color:var(--red)}
+.hint{color:var(--muted);font-size:.85rem;margin:6px 0 0}
+.status{font-weight:800;color:var(--red)}
+.status.ok{color:var(--green)}
+/* Folha impressa */
+.sheet-wrap{background:#fff;border-radius:12px;padding:10px;overflow-x:auto}
+table.sheet{border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#000;background:#fff;min-width:640px;width:100%}
+table.sheet td{border:1px solid #444;text-align:center;padding:3px 6px;font-size:12px;height:20px;font-weight:700;white-space:nowrap}
+.sheet .title{font-size:15px;font-weight:900;text-align:left;padding-left:12px}
+.sheet .t-g{color:#1F9D55}.sheet .t-r{color:#D7263D}.sheet .t-b{color:#1E4FA3}
+.sheet .data{font-size:15px;color:#1E4FA3;font-weight:900}
+.sheet .per{color:#D7263D;text-decoration:underline;font-size:11px}
+.sheet .th{color:#1E4FA3;text-decoration:underline}
+.sheet .th.rec{color:#D7263D}
+.sheet .falta{color:#D7263D}
+.sheet .nm{color:#111;font-weight:500}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:800;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+@media print{
+  @page{size:landscape;margin:10mm}
+  body{background:#fff}
+  .no-print{display:none!important}
+  .wrap{padding:0;max-width:none}
+  section.box.preview{border:0;padding:0;margin:0}
+  .sheet-wrap{padding:0;overflow:visible}
+  :root{padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top no-print">
+    <div class="logo" aria-hidden="true">🧸</div>
+    <div>
+      <h1>Escalas Central Kids</h1>
+      <p>Monte a escala do mês, confira as vagas em aberto e imprima.</p>
+    </div>
+  </header>
+
+  <div class="tabs no-print" role="tablist">
+    <button class="tab" role="tab" data-p="manha">☀️ Manhã</button>
+    <button class="tab" role="tab" data-p="noite">🌙 Noite</button>
+  </div>
+
+  <section class="box no-print">
+    <h2>Mês e datas</h2>
+    <div class="grid2">
+      <label class="f">Igreja / ministério<input id="ministerio"></label>
+      <label class="f">Unidade<input id="unidade"></label>
+      <label class="f">Mês<input type="month" id="mes"></label>
+      <label class="f">Dia do culto
+        <select id="diaSemana">
+          <option value="0">Domingo</option><option value="1">Segunda</option><option value="2">Terça</option>
+          <option value="3">Quarta</option><option value="4">Quinta</option><option value="5">Sexta</option><option value="6">Sábado</option>
+        </select>
+      </label>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="row" style="margin-top:10px">
+      <input type="date" id="novaData" aria-label="Data extra">
+      <button class="btn small" id="addData">Adicionar data</button>
+      <button class="btn small" id="gerarDatas">Recalcular datas do mês</button>
+    </div>
+    <p class="hint">Ao trocar o mês, os nomes continuam nas mesmas colunas — é só ajustar quem muda.</p>
+  </section>
+
+  <section class="box no-print">
+    <h2>Turmas e voluntários</h2>
+    <div id="turmas"></div>
+    <div class="row">
+      <button class="btn ghost" id="addTurma">+ Nova turma</button>
+      <button class="btn ghost" id="resetPeriodo">Voltar ao modelo original</button>
+    </div>
+    <p class="hint">O botão ⇉ repete o nome da primeira data em todas as outras. Campo vazio aparece como ???? na folha.</p>
+  </section>
+
+  <section class="box preview">
+    <div class="row no-print" style="justify-content:space-between;margin-bottom:10px">
+      <span id="status" class="status"></span>
+      <div class="row">
+        <button class="btn blue" id="copiar">Copiar para WhatsApp</button>
+        <button class="btn primary" id="baixarPdf" hidden>Baixar PDF</button>
+        <button class="btn primary" id="baixarPng" hidden>Baixar imagem</button>
+        <button class="btn" id="imprimir">Imprimir</button>
+      </div>
+    </div>
+    <div class="sheet-wrap"><table class="sheet" id="sheet"></table></div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<datalist id="nomes"></datalist>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const MESES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const MES_ABR=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+const KEY="escala-central-kids-v1";
+const uid=()=>Math.random().toString(36).slice(2,9);
+
+function linha(nomes,n){ // repete cada nome em n colunas; array => por coluna
+  return nomes.map(x=>Array.isArray(x)?x.slice():Array(n).fill(x));
+}
+function modelo(p){
+  const n=5;
+  if(p==="manha") return {label:"MANHÃ",turmas:[
+    {id:uid(),nome:"1/2 ANOS",rec:false,cells:linha(["VANESSA SALLES",""],n)},
+    {id:uid(),nome:"3/4 ANOS",rec:false,cells:linha(["TATIANE AP.","AMANDA"],n)},
+    {id:uid(),nome:"5/6 ANOS",rec:false,cells:linha(["","SARAH MORATO"],n)},
+    {id:uid(),nome:"07/08 ANOS",rec:false,cells:linha(["ELIANE LEITE","DAVI"],n)},
+    {id:uid(),nome:"09/10/11 ANOS",rec:false,cells:linha(["VANIA"],n)},
+    {id:uid(),nome:"12/13 ANOS",rec:false,cells:linha(["CRISTIANO K."],n)},
+    {id:uid(),nome:"RECEPÇÃO MANHÃ",rec:true,cells:linha(["SIMONE"],n)}]};
+  return {label:"NOITE",turmas:[
+    {id:uid(),nome:"1/2 ANOS",rec:false,cells:linha(["CIBELE ANA"],n)},
+    {id:uid(),nome:"3/4 ANOS",rec:false,cells:linha(["","MANUELA"],n)},
+    {id:uid(),nome:"5/6/7 ANOS",rec:false,cells:linha(["LARISSA C.","MIGUEL"],n)},
+    {id:uid(),nome:"08/11 ANOS",rec:false,cells:linha([""],n)},
+    {id:uid(),nome:"RECEPÇÃO NOITE",rec:true,cells:linha([["MARCIO","MARCIO","NATALY","NATALY","NATALY"]],n)}]};
+}
+function datasDoMes(ym,dow){
+  const [y,m]=ym.split("-").map(Number); const out=[];
+  const d=new Date(y,m-1,1);
+  while(d.getMonth()===m-1){ if(d.getDay()===dow) out.push(iso(d)); d.setDate(d.getDate()+1); }
+  return out;
+}
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function fmt(s){const [,m,d]=s.split("-");return d+"/"+MES_ABR[+m-1]}
+
+let S;
+function inicial(){
+  return {ministerio:"CENTRAL KIDS",unidade:"SÃO BERNARDO",mes:"2026-08",dow:0,
+    datas:datasDoMes("2026-08",0),ativo:"manha",periodos:{manha:modelo("manha"),noite:modelo("noite")}};
+}
+try{ const raw=localStorage.getItem(KEY); S=raw?JSON.parse(raw):inicial(); }catch(e){ S=inicial(); }
+if(!S||!S.periodos) S=inicial();
+function salvar(){ try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){} }
+
+const $=id=>document.getElementById(id);
+const P=()=>S.periodos[S.ativo];
+
+function ajustarColunas(){ // garante que cada linha tenha o nº de colunas das datas
+  const n=S.datas.length;
+  Object.values(S.periodos).forEach(p=>p.turmas.forEach(t=>t.cells.forEach(r=>{
+    while(r.length<n) r.push(r.length?r[r.length-1]:"");
+    if(r.length>n) r.length=n;
+  })));
+}
+
+function renderTopo(){
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.p===S.ativo));
+  $("ministerio").value=S.ministerio; $("unidade").value=S.unidade;
+  $("mes").value=S.mes; $("diaSemana").value=S.dow;
+  const c=$("chips"); c.innerHTML="";
+  S.datas.forEach((d,i)=>{
+    const s=document.createElement("span"); s.className="chip";
+    s.innerHTML=`${fmt(d)}<button aria-label="Remover ${fmt(d)}">×</button>`;
+    s.querySelector("button").onclick=()=>{
+      S.datas.splice(i,1);
+      Object.values(S.periodos).forEach(p=>p.turmas.forEach(t=>t.cells.forEach(r=>r.splice(i,1))));
+      tudo();
+    };
+    c.appendChild(s);
+  });
+}
+
+function renderTurmas(){
+  const box=$("turmas"); box.innerHTML="";
+  P().turmas.forEach((t,ti)=>{
+    const el=document.createElement("div"); el.className="turma";
+    const head=document.createElement("div"); head.className="turma-head";
+    head.innerHTML=`<input class="nome" aria-label="Nome da turma">
+      <button class="icon" title="Subir">↑</button>
+      <button class="icon" title="Adicionar voluntário">+👤</button>
+      <button class="icon del" title="Excluir turma">🗑</button>`;
+    const [inp,up,addV,del]=head.children;
+    inp.value=t.nome; inp.oninput=()=>{t.nome=inp.value.toUpperCase();inp.value=t.nome;t.rec=/RECEP/.test(t.nome);salvar();renderSheet();};
+    up.onclick=()=>{ if(ti>0){const a=P().turmas;[a[ti-1],a[ti]]=[a[ti],a[ti-1]];tudo();} };
+    addV.onclick=()=>{ t.cells.push(Array(S.datas.length).fill("")); tudo(); };
+    del.onclick=()=>{ if(confirm(`Excluir a turma ${t.nome}?`)){P().turmas.splice(ti,1);tudo();} };
+    el.appendChild(head);
+
+    const sc=document.createElement("div"); sc.className="scroll";
+    const tb=document.createElement("table"); tb.className="ed";
+    let h="<tr><th></th>"+S.datas.map(d=>`<th>${fmt(d)}</th>`).join("")+"<th></th></tr>";
+    tb.innerHTML=h;
+    t.cells.forEach((r,ri)=>{
+      const tr=document.createElement("tr");
+      const f=document.createElement("td"); f.className="fill";
+      f.innerHTML=`<button class="icon" title="Repetir em todas as datas">⇉</button>`;
+      f.firstChild.onclick=()=>{ const v=r[0]||""; r.fill(v); tudo(); };
+      tr.appendChild(f);
+      r.forEach((v,ci)=>{
+        const td=document.createElement("td"); const i=document.createElement("input");
+        i.value=v; i.setAttribute("list","nomes"); i.placeholder="????";
+        i.setAttribute("aria-label",`${t.nome}, voluntário ${ri+1}, ${fmt(S.datas[ci])}`);
+        i.className=v.trim()?"":"vazio";
+        i.oninput=()=>{ r[ci]=i.value.toUpperCase(); i.value=r[ci]; i.className=r[ci].trim()?"":"vazio"; salvar(); renderSheet(); };
+        i.onchange=()=>renderNomes();
+        td.appendChild(i); tr.appendChild(td);
+      });
+      const x=document.createElement("td");
+      x.innerHTML=`<button class="icon del" title="Remover linha">×</button>`;
+      x.firstChild.onclick=()=>{ t.cells.splice(ri,1); tudo(); };
+      tr.appendChild(x);
+      tb.appendChild(tr);
+    });
+    sc.appendChild(tb); el.appendChild(sc); box.appendChild(el);
+  });
+}
+
+function renderNomes(){
+  const set=new Set();
+  Object.values(S.periodos).forEach(p=>p.turmas.forEach(t=>t.cells.forEach(r=>r.forEach(v=>v.trim()&&set.add(v.trim())))));
+  $("nomes").innerHTML=[...set].sort().map(n=>`<option value="${n.replace(/"/g,"&quot;")}">`).join("");
+}
+
+function esc(s){return s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}
+function renderSheet(){
+  const p=P(), n=S.datas.length, [y,m]=S.mes.split("-");
+  const mesTxt=MESES[+m-1].toUpperCase()+" / "+y;
+  let h=`<tr><td class="title" colspan="${n}"><span class="t-g">${esc(p.label)}</span> <span class="t-r">- ${esc(S.ministerio)} -</span> <span class="t-r">${esc(S.unidade)}</span> <span class="t-b">- ${mesTxt}</span></td></tr>`;
+  h+="<tr>"+S.datas.map(d=>`<td class="data">${fmt(d)}</td>`).join("")+"</tr>";
+  h+="<tr>"+S.datas.map(()=>`<td class="per">${esc(p.label)}</td>`).join("")+"</tr>";
+  let faltas=0;
+  p.turmas.forEach(t=>{
+    h+="<tr>"+Array(n).fill("<td></td>").join("")+"</tr>";
+    h+="<tr>"+Array(n).fill(`<td class="th${t.rec?" rec":""}">${esc(t.nome)}</td>`).join("")+"</tr>";
+    t.cells.forEach(r=>{
+      h+="<tr>"+r.map(v=>{ if(!v.trim()){faltas++;return `<td class="falta">????</td>`;} return `<td class="nm">${esc(v)}</td>`;}).join("")+"</tr>";
+    });
+  });
+  $("sheet").innerHTML=h;
+  const st=$("status");
+  st.textContent=faltas?`${faltas} vaga${faltas>1?"s":""} sem voluntário`:"Escala completa ✓";
+  st.className="status"+(faltas?"":" ok");
+}
+
+function tudo(){ ajustarColunas(); salvar(); renderTopo(); renderTurmas(); renderNomes(); renderSheet(); }
+
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.ativo=b.dataset.p;tudo();});
+$("ministerio").oninput=e=>{S.ministerio=e.target.value.toUpperCase();salvar();renderSheet();};
+$("unidade").oninput=e=>{S.unidade=e.target.value.toUpperCase();salvar();renderSheet();};
+function regerar(){ if(!S.mes) return; S.datas=datasDoMes(S.mes,+S.dow); tudo(); }
+$("mes").onchange=e=>{S.mes=e.target.value;regerar();};
+$("diaSemana").onchange=e=>{S.dow=+e.target.value;regerar();};
+$("gerarDatas").onclick=regerar;
+$("addData").onclick=()=>{
+  const v=$("novaData").value; if(!v||S.datas.includes(v)) return;
+  S.datas.push(v); S.datas.sort();
+  const idx=S.datas.indexOf(v);
+  Object.values(S.periodos).forEach(p=>p.turmas.forEach(t=>t.cells.forEach(r=>r.splice(idx,0,""))));
+  tudo();
+};
+$("addTurma").onclick=()=>{P().turmas.push({id:uid(),nome:"NOVA TURMA",rec:false,cells:[Array(S.datas.length).fill("")]});tudo();};
+$("resetPeriodo").onclick=()=>{ if(confirm("Substituir as turmas deste período pelo modelo original?")){S.periodos[S.ativo]=modelo(S.ativo);tudo();} };
+$("imprimir").onclick=()=>window.print();
+
+function nomeArquivo(ext){
+  const [y,m]=S.mes.split("-");
+  return `escala-${P().label.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}-${MESES[+m-1].normalize("NFD").replace(/[\u0300-\u036f]/g,"")}-${y}.${ext}`;
+}
+async function capturar(){
+  const box=document.createElement("div");
+  box.style.cssText="position:fixed;left:-10000px;top:0;background:#fff;padding:16px;width:max-content";
+  box.appendChild($("sheet").cloneNode(true));
+  document.body.appendChild(box);
+  try{ return await html2canvas(box,{scale:2,backgroundColor:"#ffffff"}); }
+  finally{ box.remove(); }
+}
+async function salvarArquivo(filename,data){
+  const url=URL.createObjectURL(data);
+  const a=document.createElement("a"); a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  toast("Arquivo baixado!");
+}
+$("baixarPng").onclick=async()=>{
+  const btn=$("baixarPng"); btn.disabled=true;
+  try{
+    const c=await capturar();
+    const blob=await new Promise(r=>c.toBlob(r,"image/png"));
+    await salvarArquivo(nomeArquivo("png"),blob);
+  }catch(e){ toast("Erro ao gerar a imagem"); }
+  btn.disabled=false;
+};
+$("baixarPdf").onclick=async()=>{
+  const btn=$("baixarPdf"); btn.disabled=true;
+  try{
+    const c=await capturar();
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
+    const W=297,H=210,mg=10;
+    const r=Math.min((W-2*mg)/c.width,(H-2*mg)/c.height);
+    const w=c.width*r,h=c.height*r;
+    pdf.addImage(c.toDataURL("image/png"),"PNG",(W-w)/2,mg,w,h);
+    await salvarArquivo(nomeArquivo("pdf"),pdf.output("blob"));
+  }catch(e){ toast("Erro ao gerar o PDF"); }
+  btn.disabled=false;
+};
+if(window.html2canvas) $("baixarPng").hidden=false;
+if(window.html2canvas&&window.jspdf) $("baixarPdf").hidden=false;
+
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800);}
+$("copiar").onclick=async()=>{
+  const p=P(), [y,m]=S.mes.split("-");
+  let txt=`*${p.label} – ${S.ministerio} – ${S.unidade}*\n*${MESES[+m-1].toUpperCase()}/${y}*\n`;
+  S.datas.forEach((d,ci)=>{
+    txt+=`\n📅 *${fmt(d)}*\n`;
+    p.turmas.forEach(t=>{ txt+=`• ${t.nome}: ${t.cells.map(r=>r[ci]&&r[ci].trim()?r[ci]:"????").join(", ")}\n`; });
+  });
+  try{ await navigator.clipboard.writeText(txt); toast("Copiado!"); }
+  catch(e){
+    const a=document.createElement("textarea"); a.value=txt; document.body.appendChild(a); a.select();
+    try{document.execCommand("copy");toast("Copiado!");}catch(_){toast("Não foi possível copiar");}
+    a.remove();
+  }
+};
+tudo();
+</script>
+</body>
+</html>
